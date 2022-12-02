@@ -4,7 +4,7 @@ Simple ML model that predicts price for Kaggle Competition "Predict Future Sales
 
 main.py is under applications directory 
 
-## Repo Strutructure:
+## Repo Structure:
 **data folder** 
 -  Data class has I/O function for csv files
 
