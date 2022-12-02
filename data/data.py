@@ -1,3 +1,4 @@
+from prep import Format
 import pandas as pd
 import os
 
@@ -14,4 +15,14 @@ class Data():
             df = pd.read_csv(path)
             return df
         else:
-            print("Formatted not implemented")
+            print("file type not implemented")
+
+    def read_format(self, filename: str):
+        df = self.read(filename)
+        col_list = df.columns.tolist()
+        if 'shop_id' in col_list:
+            df = Format.string_format(df, 'shop_id', 2)
+        if 'item_id' in col_list:
+            df = Format.string_format(df, 'item_id', 5)
+
+        return df
