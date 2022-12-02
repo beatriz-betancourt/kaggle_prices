@@ -1,17 +1,11 @@
 from data import Data
 from prep import Prep
-from visual import Plot3d
 from Defaults import Defaults
-from model import Features, LinearModels, GeneralModel
+from model import Features, LinearModels
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import make_scorer
-
-
-
 
 
 if __name__ == '__main__':
