@@ -28,7 +28,7 @@ class PrepTime:
         :param col_name: column to test its value
         :return: df
         """
-        indx = df[col_name] > Defaults.MIN_DATA_POINTS
+        indx = df[col_name] > 1
 
         return df.loc[indx]
 

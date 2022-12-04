@@ -4,7 +4,7 @@ import numpy as np
 from mpl_toolkits import mplot3d
 
 
-class Plot3d:
+class Plots:
 
     @staticmethod
     def plot_3d(df: pd.DataFrame, item_id: int, x_col: str, y_col: str, z_col: str, color: str):

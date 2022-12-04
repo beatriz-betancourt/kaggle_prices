@@ -2,9 +2,9 @@
 
 Simple ML model that predicts price for Kaggle Competition "Predict Future Sales"
 
-main.py is under applications directory 
+Main function main.py is under the **applications** directory
 
-## Repo Strutructure:
+## Repository Structure:
 **data folder** 
 -  Data class has I/O function for csv files
 
@@ -15,7 +15,7 @@ main.py is under applications directory
 
 **prep folder** 
 - Format class  has functions that gives format to dataframes
-- PrepTime      has functions to clean data base on time depedence 
+- PrepTime      has functions to clean data based on time dependence 
 - Prep          has functions to format and clean data for training 
 
 **visual folder**
