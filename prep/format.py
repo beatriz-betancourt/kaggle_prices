@@ -33,9 +33,9 @@ class Format():
         df.loc[:, colname] = pd.to_datetime(df.loc[:, colname], infer_datetime_format=True, dayfirst=True)
         return df
 
-    def format_data(self, df:pd.DataFrame):
+    def format_data(self, df: pd.DataFrame):
         """
-        Prepare data types for training
+        Prepare utils types for training
         :param df:
         :return: df
         """
@@ -46,7 +46,7 @@ class Format():
 
         return df
 
-    def format_category(self, df:pd.DataFrame):
+    def format_category(self, df: pd.DataFrame):
         """
         Format category datafile
         :param df:

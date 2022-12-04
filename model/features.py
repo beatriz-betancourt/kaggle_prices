@@ -19,15 +19,16 @@ class Features:
         features_df.columns = ["_".join(a) for a in features_df.columns.to_flat_index()]
         return features_df.reset_index()
 
-    def get_date_features(self, df:pd.DataFrame, group_list:list):
+    @staticmethod
+    def get_time_features(df:pd.DataFrame, group_list: list):
         """
-        Extracts freatures from date column
+        Extracts features from date column
         :param df:
-        :param group_list: list of columns that the dataframe is goupped by
+        :param group_list: list of columns that the dataframe is groupped by
         :return: features df
         """
         features_df = df.groupby(group_list).agg({
-            'date': ['first','last','count']
+            'date': ['first', 'last', 'count', 'nunique']
         })
         features_df.columns = ["_".join(a) for a in features_df.columns.to_flat_index()]
         return features_df.reset_index()
@@ -41,8 +42,8 @@ class Features:
         """
         functions = ['mean','std','count']
         groupby_cols= ['shop_id','item_id']
-        price_df=self.get_price_features(df,groupby_cols,functions)
-        date_df = self.get_date_features(df,groupby_cols)
+        price_df=self.get_price_features(df, groupby_cols, functions)
+        date_df = self.get_time_features(df, groupby_cols)
 
         feaures_df= price_df.merge(date_df,on=['shop_id','item_id'],how='inner')
         return feaures_df

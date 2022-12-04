@@ -3,7 +3,7 @@
 class Defaults:
 
     DATA_DIR = '/home/bea/PycharmProjects/Data/predict_future_sales'
-    OUT_DIR = '/bea/data/kaggle/'
+    OUT_DIR = '/bea/utils/kaggle/'
     REPO_DIR = '/home/bea/PycharmProjects/kaggle_prices'
     TRAIN_FILENAME = 'sales_train.csv'
     ITEM_FILENAME = 'items.csv'

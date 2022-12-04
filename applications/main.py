@@ -1,4 +1,4 @@
-from data import Data
+from utils import Data
 from prep import Prep
 from Defaults import Defaults
 from model import Features, LinearModels
@@ -13,13 +13,15 @@ if __name__ == '__main__':
     dflt = Defaults()
     data = Data(dflt.DATA_DIR)
     prep = Prep()
-    model = LinearModels()
     features = Features()
+    model = LinearModels()
 
     train_df = data.read(dflt.TRAIN_FILENAME)
     itms_df = data.read(dflt.ITEM_FILENAME)
 
     clean_df = prep.data_prep_step_1(train_df, itms_df)
+    clean_df = prep.data_prep_step_2(clean_df)
+
     features_df = features.add_features(clean_df, train_df)
     target_col = dflt.TARGET_COL_NAME
     group_features_df = features_df.groupby(dflt.GROUP_BY_COL_NAMES)
