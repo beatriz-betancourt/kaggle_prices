@@ -48,8 +48,11 @@ class Features:
         date_df = self.get_date_features(df, groupby_cols)
         features_df = self._utils.merge(price_df, date_df, on=groupby_cols, how='inner', tag='date_features')
         shift_df = self.get_shift_features(df)
-        features_df = self._utils.merge(features_df, shift_df, on=groupby_cols, how='left', tag='shift_features')
-
+        features_df = self._utils.merge(features_df, shift_df, on=groupby_cols, how='inner', tag='shift_features')
+        category_df = df[['item_id','item_category_id']].drop_duplicates()
+        features_df = self._utils.merge(features_df, category_df, on=['item_id'],how='left', tag='category_id')
+        features_df = features_df.drop(columns=['shop_id', 'item_category_id', 'item_id', 'date_freq',
+                                                'date_first', 'date_last']).fillna(0)
         return features_df
 
     def add_features(self, clean_df: pd.DataFrame, df: pd.DataFrame):

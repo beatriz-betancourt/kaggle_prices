@@ -25,7 +25,7 @@ if __name__ == '__main__':
     logger.print_info("Getting Features")
     features_df = features.get_features(clean_df)
     target_col = dflt.TARGET_COL_NAME
-    group_features_df = features_df.groupby(dflt.GROUP_BY_COL_NAMES)
+    group_features_df = features_df.groupby(['shop_id','item_category_id'])
     logger.print_info("Training Items")
     if Defaults.SERIAL:
         pipe, params = model.set_training_parameters()
@@ -33,9 +33,11 @@ if __name__ == '__main__':
         for (shop_id, itm_id), group_df in group_features_df:
             if len(group_df) > dflt.MIN_DATA_POINTS :
                 y_df = group_df[target_col]
-                X_df = group_df.drop(columns=[target_col,dflt.GROUP_BY_COL_NAMES])
+                X_df = group_df.drop(columns=[target_col])
                 X_train, X_test, y_train, y_test = train_test_split(X_df, y_df, test_size=0.3)
                 best_model = grid_search.fit(X_train, y_train)
                 y_pred = best_model.predict(X_test)
                 model.save_test_score_data(shop_id, itm_id, dflt.REPO_DIR, y_pred, y_test, dflt.RUN_INDICATOR)
                 print(grid_search.best_score_)
+
+    logger.print_info("Finish training")
