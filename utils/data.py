@@ -1,6 +1,6 @@
-from prep import Format
 import pandas as pd
 import os
+from prep import Format
 
 
 class Data():

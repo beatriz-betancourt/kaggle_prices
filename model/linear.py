@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from utils import Data
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet, LassoLars, BayesianRidge
@@ -14,7 +13,7 @@ import pickle
 
 class LinearModels():
 
-    def __init__(self):
+    def __init__(self, data_obj: Data):
         self.models = {'lr': LinearRegression(),
                        'ridge': Ridge(),
                        'lasso': Lasso(),
@@ -26,6 +25,8 @@ class LinearModels():
                                                              n_jobs=-2, random_state=0),
                        'XGBoost': GradientBoostingRegressor()
                        }
+        self.data_obj = data_obj
+
 
     def get_models(self, type: str):
         return self.models.get(type)
@@ -61,8 +62,7 @@ class LinearModels():
         if not os.path.exists(full_path):
             data.to_csv(full_path)
         else:
-            data_obj = Data(path_dir)
-            prev_data = data_obj.read_format(filename)
+            prev_data = self.data_obj.read_format(filename)
             new_data = pd.concat([prev_data, data], axis=0)
             new_data.to_csv(full_path)
 

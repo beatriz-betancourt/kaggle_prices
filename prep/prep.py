@@ -2,12 +2,10 @@ import pandas as pd
 from .format import Format
 from .prep_time import PrepTime
 
-
 class Prep:
 
     def __init__(self):
         pass
-
     @staticmethod
     def data_prep_step_1(price_df: pd.DataFrame, itm_df: pd.DataFrame):
         """
@@ -28,20 +26,12 @@ class Prep:
     @staticmethod
     def data_prep_step_2(df: pd.DataFrame):
         """
-        Cleans time dependence variables and fills in periodic inputs
+        Cleans time dependence variables, remove items that have less than 1 counts
+        To use at shop_id, item_id level
+        :param df:
         :return:
         """
         prep_time = PrepTime()
         clean_df = prep_time.clean_data_time_series(df)
 
         return clean_df
-
-    @staticmethod
-    def data_prep_step_3(df: pd.DataFrame):
-        """
-
-        :param df:
-        :return:
-        """
-        prep_time = PrepTime()
-        prep_time.set_same_time_period(df)

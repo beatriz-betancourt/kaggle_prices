@@ -1,6 +1,7 @@
-from utils import Data
-from prep import Prep
 from Defaults import Defaults
+from prep import Prep
+from utils import Data
+from utils import Logger
 from model import Features, LinearModels
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
@@ -11,21 +12,21 @@ from sklearn.metrics import make_scorer
 if __name__ == '__main__':
 
     dflt = Defaults()
+    logger = Logger()
     data = Data(dflt.DATA_DIR)
     prep = Prep()
     features = Features()
-    model = LinearModels()
-
+    model = LinearModels(data)
+    logger.print_info("Reading input files")
     train_df = data.read(dflt.TRAIN_FILENAME)
     itms_df = data.read(dflt.ITEM_FILENAME)
-
+    logger.print_info("Cleaning data")
     clean_df = prep.data_prep_step_1(train_df, itms_df)
-    clean_df = prep.data_prep_step_2(clean_df)
-
-    features_df = features.add_features(clean_df, train_df)
+    logger.print_info("Getting Features")
+    features_df = features.get_features(clean_df)
     target_col = dflt.TARGET_COL_NAME
     group_features_df = features_df.groupby(dflt.GROUP_BY_COL_NAMES)
-
+    logger.print_info("Training Items")
     if Defaults.SERIAL:
         pipe, params = model.set_training_parameters()
         grid_search = GridSearchCV(pipe, param_grid=params, scoring=make_scorer(mean_squared_error))

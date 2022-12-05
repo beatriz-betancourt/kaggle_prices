@@ -14,6 +14,8 @@ class Defaults:
     #Training Data Parameters
     RUN_INDICATOR = '0'
     MIN_DATA_POINTS = 7
-    TARGET_COL_NAME = 'item_price'
+    #TARGET_COL_NAME = 'item_price'
+    TARGET_COL_NAME = 'item_price_last'
+
     GROUP_BY_COL_NAMES = ['shop_id','item_id']
 
