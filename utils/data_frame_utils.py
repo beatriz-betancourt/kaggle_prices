@@ -18,7 +18,11 @@ class DataFrameUtils:
         ini_len = len(df_1)
         df = df_1.merge(df_2, on=on, how=how)
         final_len = len(df_1)
-        self._logger.print_size_change(ini_len, final_len, f"merge_{tag}")
+        delta = ini_len - final_len
+        if delta == 0:
+            self._logger.print_info(f"merge {tag} didn't change df size: {ini_len}")
+        else:
+            self._logger.print_size_change(ini_len, final_len, f"merge_{tag}")
         return df
 
     def flat_multindex(self, df: pd.DataFrame):
